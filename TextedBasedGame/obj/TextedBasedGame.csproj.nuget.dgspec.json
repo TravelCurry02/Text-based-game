@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\wesga\\Documents\\BYUI\\TextedBasedGame\\TextedBasedGame\\TextedBasedGame.csproj": {}
+    "c:\\Users\\wesga\\Documents\\BYUI\\Text-based-game\\TextedBasedGame\\TextedBasedGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\wesga\\Documents\\BYUI\\TextedBasedGame\\TextedBasedGame\\TextedBasedGame.csproj": {
+    "c:\\Users\\wesga\\Documents\\BYUI\\Text-based-game\\TextedBasedGame\\TextedBasedGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\wesga\\Documents\\BYUI\\TextedBasedGame\\TextedBasedGame\\TextedBasedGame.csproj",
+        "projectUniqueName": "c:\\Users\\wesga\\Documents\\BYUI\\Text-based-game\\TextedBasedGame\\TextedBasedGame.csproj",
         "projectName": "TextedBasedGame",
-        "projectPath": "C:\\Users\\wesga\\Documents\\BYUI\\TextedBasedGame\\TextedBasedGame\\TextedBasedGame.csproj",
+        "projectPath": "c:\\Users\\wesga\\Documents\\BYUI\\Text-based-game\\TextedBasedGame\\TextedBasedGame.csproj",
         "packagesPath": "C:\\Users\\wesga\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\wesga\\Documents\\BYUI\\TextedBasedGame\\TextedBasedGame\\obj\\",
+        "outputPath": "c:\\Users\\wesga\\Documents\\BYUI\\Text-based-game\\TextedBasedGame\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
