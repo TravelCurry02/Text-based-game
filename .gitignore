@@ -1,3 +1,57 @@
-.idea
-/TextedBasedGame/bin
-/TextedBasedGame/obj
+# IDEs
+.vscode/
+.idea/
+
+# Build results
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+
+# Visual Studio working folder
+.vs/
+
+# Package management
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# Azure Functions
+.local.settings.json
+
+# Rider
+.idea/
+*.sln.iml
+
+# Mac
+*.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# NPM files (if you're using Node.js in any capacity)
+node_modules/
+npm-debug.log*
+
+# Logs and debugging
+*.log
+logs/
