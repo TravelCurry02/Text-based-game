@@ -20,9 +20,7 @@ while (isRunning)
             Console.WriteLine("Your health is 100. Your score is 0.");
             break;
         case "3":
-            Console.WriteLine("Where do you want to go?");
             Console.WriteLine(" ");
-            string move = Console.ReadLine();
             break;
         case "4":
             Console.WriteLine("Goodbye!");
