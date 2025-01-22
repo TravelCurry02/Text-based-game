@@ -1,4 +1,5 @@
-﻿using System;
+﻿﻿using System;
+using RoomMaking;
 
 class Program
 {
@@ -20,7 +21,11 @@ class Program
             player = new PlayerData { Name = playerName };
             player.Save(playerDataPath);
         }
-        
+
+        // Room creation and navigation
+        RoomCreation roomCreation = new RoomCreation();
+        Room currentRoom = roomCreation.Rooms["forest"]; // Starting room
+
         TextManager textManager = new TextManager(textsPath);
 
         bool isRunning = true;
@@ -38,12 +43,25 @@ class Program
             {
                 case "1":
                     Console.WriteLine(textManager.GetText("explore"));
+                    currentRoom.TriggerEvent(player); // Trigger event when exploring
                     break;
                 case "2":
                     Console.WriteLine($"Your health is {player.Health}. Your score is {player.Score}.");
                     break;
                 case "3":
-                    Console.WriteLine(textManager.GetText("move"));
+                    Console.Write("Which direction would you like to move? (north, south, east, west): ");
+                    string direction = Console.ReadLine()?.ToLower(); 
+
+                    if (currentRoom.Neighbors.ContainsKey(direction))
+                    {
+                        currentRoom = currentRoom.Neighbors[direction];
+                        Console.WriteLine($"You move {direction}. {currentRoom.Description}");
+                        currentRoom.TriggerEvent(player); // Trigger event when moving
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid direction. Try again.");
+                    }
                     break;
                 case "4":
                     Console.WriteLine(textManager.GetText("quit"));
@@ -53,7 +71,8 @@ class Program
                     Console.WriteLine("Invalid option. Try again.");
                     break;
             }
-            
+
+            // Save player data after each action
             player.Save(playerDataPath);
         }
     }
