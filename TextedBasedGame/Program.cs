@@ -1,35 +1,16 @@
-﻿﻿using System;
+﻿using System;
 using RoomMaking;
 
 class Program
 {
     static void Main(string[] args)
     {
-        bool isRunning = false;
-        
-        Console.WriteLine("Welcome in Texted Based Game! Using C#");
-        Console.WriteLine("1. I'm a new player");
-        Console.WriteLine("2. I want continue my game");
-        Console.WriteLine("3. Quit");
-        Console.Write("Choose an option: ");
-        string input = Console.ReadLine()!;
-
-        if (input.ToLower() == "1")
-        {
-            Console.WriteLine("Whats your name?");
-            string playerName = Console.ReadLine()!;
-
-        }
-        if (input.ToLower() == "2")
-        {
-            isRunning = true;
-            Progress(isRunning);
-        }
+        Progress();
     }
 
-    public static void Progress(bool isRunning)
+    public static void Progress()
     {
-        string playerDataPath = "Data/playerData.json";
+       string playerDataPath = "Data/playerData.json";
         string textsPath = "Data/texts.json";
         
         PlayerData player;
@@ -51,10 +32,12 @@ class Program
         Room currentRoom = roomCreation.Rooms["forest"]; // Starting room
 
         TextManager textManager = new TextManager(textsPath);
-        
+
+        bool isRunning = true;
         while (isRunning)
         {
             Console.WriteLine("What would you like to do?");
+            Console.WriteLine("");
             Console.WriteLine("1. Explore");
             Console.WriteLine("2. Check Status");
             Console.WriteLine("3. Move");
