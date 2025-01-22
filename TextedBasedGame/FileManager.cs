@@ -6,26 +6,33 @@ public static class FileManager
 {
     public static T ReadFromFile<T>(string filePath)
     {
-        try // Added try-catch for error handling
+        try
         {
             if (!File.Exists(filePath))
             {
-                throw new FileNotFoundException($"File not found: {filePath}");
+                return default; // Retorna null se o arquivo não existir
             }
 
             string json = File.ReadAllText(filePath);
             return JsonSerializer.Deserialize<T>(json);
         }
-        catch (Exception ex) //Handle file or deserialization errors
+        catch (Exception ex)
         {
             Console.WriteLine($"Error reading file: {ex.Message}");
-            return default; // Return a default value if deserialization fails
+            return default;
         }
     }
 
     public static void WriteToFile<T>(string filePath, T data)
     {
-        string json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText(filePath, json);
+        try
+        {
+            string json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(filePath, json);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error writing file: {ex.Message}");
+        }
     }
 }

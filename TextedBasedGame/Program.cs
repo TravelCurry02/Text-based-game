@@ -1,55 +1,83 @@
 ﻿using System;
+using System.IO;
 using RoomMaking;
 
 class Program
 {
     static void Main(string[] args)
     {
-        bool isRunning = false;
-        
+        bool isRunning = true;
+
         Console.WriteLine("Welcome in Texted Based Game! Using C#");
         Console.WriteLine("1. I'm a new player");
-        Console.WriteLine("2. I want continue my game");
+        Console.WriteLine("2. I want to continue my game");
         Console.WriteLine("3. Quit");
         Console.Write("Choose an option: ");
         string input = Console.ReadLine()!;
-        if (input.ToLower() == "1")
-        {
-            Console.WriteLine("Whats your name?");
-            string playerName = Console.ReadLine()!;
-        }
-        if (input.ToLower() == "2")
-        {
-            isRunning = true;
-            Progress(isRunning);
-        }
-    }
-
-    public static void Progress(bool isRunning)
-    {
-       string playerDataPath = "Data/playerData.json";
-        string textsPath = "Data/texts.json";
         
-        PlayerData player;
-        if (System.IO.File.Exists(playerDataPath))
+        string playerDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Data", "playerData.json");
+        var playersData = FileManager.ReadFromFile<Dictionary<string, PlayerData>>(playerDataPath) ?? new Dictionary<string, PlayerData>();
+
+        PlayerData player = null;
+
+        if (input == "1")
         {
-            player = PlayerData.Load(playerDataPath);
-            Console.WriteLine($"Welcome back, {player.Name}!");
+            Console.WriteLine();
+            Console.WriteLine("What's your name?");
+            string playerName = Console.ReadLine()!;
+
+            if (playersData.ContainsKey(playerName))
+            {
+                Console.WriteLine("Player already exists. Overwriting data...");
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine($"Welcome, {playerName}! Starting a new game.");
+                Console.WriteLine();
+            }
+            
+            player = new PlayerData { Name = playerName };
+            playersData[playerName] = player;
+
+            SavePlayerData(playerDataPath, playersData);
+            Progress(isRunning, player, playersData, playerDataPath);
+        }
+        else if (input == "2")
+        {
+            Console.Write("Enter your player name: ");
+            string playerName = Console.ReadLine()!;
+
+            if (playersData.ContainsKey(playerName))
+            {
+                player = playersData[playerName];
+                Console.WriteLine($"Welcome back, {playerName}! Your current health is {player.Health} and score is {player.Score}.");
+                Console.WriteLine();
+                
+                Progress(isRunning, player, playersData, playerDataPath);
+            }
+            else
+            {
+                Console.WriteLine("Player not found. Please start a new game.");
+            }
+        }
+        else if (input == "3")
+        {
+            Console.WriteLine("Goodbye!");
         }
         else
         {
-            Console.Write("Enter your player name: ");
-            string playerName = Console.ReadLine();
-            player = new PlayerData { Name = playerName };
-            player.Save(playerDataPath);
+            Console.WriteLine("Invalid option. Exiting...");
         }
+    }
 
-        // Room creation and navigation
+    public static void Progress(bool isRunning, PlayerData player, Dictionary<string, PlayerData> playersData, string playerDataPath)
+    {
+        string textsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Data", "texts.json");
         RoomCreation roomCreation = new RoomCreation();
-        Room currentRoom = roomCreation.Rooms["forest"]; // Starting room
-
+        Room currentRoom = roomCreation.Rooms["forest"];
         TextManager textManager = new TextManager(textsPath);
-        
+
         while (isRunning)
         {
             Console.WriteLine("What would you like to do?");
@@ -59,26 +87,26 @@ class Program
             Console.WriteLine("3. Move");
             Console.WriteLine("4. Quit");
             Console.Write("Choose an option: ");
-            string input = Console.ReadLine();
+            string input = Console.ReadLine()!;
 
             switch (input)
             {
                 case "1":
                     Console.WriteLine(textManager.GetText("explore"));
-                    currentRoom.TriggerEvent(player); // Trigger event when exploring
+                    currentRoom.TriggerEvent(player);
                     break;
                 case "2":
                     Console.WriteLine($"Your health is {player.Health}. Your score is {player.Score}.");
                     break;
                 case "3":
                     Console.Write("Which direction would you like to move? (north, south, east, west): ");
-                    string direction = Console.ReadLine()?.ToLower(); 
+                    string direction = Console.ReadLine()?.ToLower()!;
 
                     if (currentRoom.Neighbors.ContainsKey(direction))
                     {
                         currentRoom = currentRoom.Neighbors[direction];
                         Console.WriteLine($"You move {direction}. {currentRoom.Description}");
-                        currentRoom.TriggerEvent(player); // Trigger event when moving
+                        currentRoom.TriggerEvent(player);
                     }
                     else
                     {
@@ -93,10 +121,28 @@ class Program
                     Console.WriteLine("Invalid option. Try again.");
                     break;
             }
+            
+            playersData[player.Name] = player;
+            SavePlayerData(playerDataPath, playersData);
+        }
+    }
 
-            // Save player data after each action
-            player.Save(playerDataPath);
-        } 
+    private static void SavePlayerData(string playerDataPath, Dictionary<string, PlayerData> playersData)
+    {
+        try
+        {
+            string directory = Path.GetDirectoryName(playerDataPath)!;
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            FileManager.WriteToFile(playerDataPath, playersData);
+            Console.WriteLine("Player data successfully saved.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving player data: {ex.Message}");
+        }
     }
 }
-
