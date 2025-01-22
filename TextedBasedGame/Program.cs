@@ -5,7 +5,12 @@ class Program
 {
     static void Main(string[] args)
     {
-        string playerDataPath = "Data/playerData.json";
+        Progress();
+    }
+
+    public static void Progress()
+    {
+       string playerDataPath = "Data/playerData.json";
         string textsPath = "Data/texts.json";
         
         PlayerData player;
@@ -74,6 +79,7 @@ class Program
 
             // Save player data after each action
             player.Save(playerDataPath);
-        }
+        } 
     }
 }
+
