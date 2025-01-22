@@ -6,7 +6,7 @@ public static class FileManager
 {
     public static T ReadFromFile<T>(string filePath)
     {
-        try // Improvement: Added try-catch for error handling
+        try // Added try-catch for error handling
         {
             if (!File.Exists(filePath))
             {
@@ -16,7 +16,7 @@ public static class FileManager
             string json = File.ReadAllText(filePath);
             return JsonSerializer.Deserialize<T>(json);
         }
-        catch (Exception ex) // Improvement: Gracefully handle file or deserialization errors
+        catch (Exception ex) //Handle file or deserialization errors
         {
             Console.WriteLine($"Error reading file: {ex.Message}");
             return default; // Return a default value if deserialization fails
