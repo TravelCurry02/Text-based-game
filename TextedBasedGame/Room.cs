@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.WebSockets;
 
 namespace RoomMaking
 {
@@ -60,27 +61,88 @@ namespace RoomMaking
         // Create rooms and assign events to them
         private void CreateRooms()
         {
-            Room forest = new Room("You are in a dense forest. Paths lead north and south.");
+            Room forest = new Room("You are in a dense forest.");
             forest.Events.Add("Found treasure");
             forest.Events.Add("Fell into a trap");
 
-            Room mountain = new Room("You are on a rocky mountain. Paths lead east and west.");
+            Room mountain = new Room("You are on a rocky mountain.");
             mountain.Events.Add("Found treasure");
             mountain.Events.Add("Fell into a trap");
 
-            Room lake = new Room("You are beside a serene lake. Paths lead south and west.");
+            Room lake = new Room("You are beside a serene lake.");
             lake.Events.Add("Rested and regained health");
+
+            Room mine = new Room("You are within a deep mine. You could find some gems here.");
+            mine.Events.Add("Found treasure");
+
+            Room temple = new Room("You are at an abandoned temple.");
+            temple.Events.Add("Found treasure");
+            temple.Events.Add("Fell into a trap");
+            temple.Events.Add("Rested and Regain Health");
+
+            Room marsh = new Room("You are in a disgusting marsh.");
+            marsh.Events.Add("Found treasaure");
+            marsh.Events.Add("Fell into a trap");
+
+            Room plains = new Room("You are on some grassy plains.");
+            marsh.Events.Add("Found treasaure");
+            marsh.Events.Add("Fell into a trap");
+
+            Room volcano = new Room("You are near a blistering volcano. Thankfully its not erupting.");
+            marsh.Events.Add("Found treasaure");
+            marsh.Events.Add("Fell into a trap");
+        
+            Room tundra = new Room("You are in a freezing tundra.");
+            marsh.Events.Add("Found treasaure");
+            marsh.Events.Add("Fell into a trap");
+        
 
             forest.Neighbors["north"] = mountain;
             forest.Neighbors["south"] = lake;
+            forest.Neighbors["east"] = temple;
+            forest.Neighbors["west"] = volcano;
             mountain.Neighbors["south"] = forest;
-            mountain.Neighbors["east"] = lake;
-            lake.Neighbors["west"] = mountain;
+            mountain.Neighbors["north"] = lake;
+            mountain.Neighbors["east"] = plains;
+            mountain.Neighbors["west"] = marsh;
+            lake.Neighbors["south"] = mountain;
             lake.Neighbors["north"] = forest;
+            lake.Neighbors["east"] = mine;
+            lake.Neighbors["west"] = tundra;
+            mine.Neighbors["south"] = plains;
+            mine.Neighbors["north"] = temple;
+            mine.Neighbors["east"] = tundra;
+            mine.Neighbors["west"] = lake;
+            temple.Neighbors["south"] = mine;
+            temple.Neighbors["north"] = plains;
+            temple.Neighbors["east"] = volcano;
+            temple.Neighbors["west"] = forest;
+            plains.Neighbors["south"] = temple;
+            plains.Neighbors["north"] = mine;
+            plains.Neighbors["east"] = marsh;
+            plains.Neighbors["west"] = mountain;
+            marsh.Neighbors["south"] = volcano;
+            marsh.Neighbors["north"] = tundra;
+            marsh.Neighbors["east"] = mountain;
+            marsh.Neighbors["west"] = plains;
+            volcano.Neighbors["south"] = tundra;
+            volcano.Neighbors["north"] = marsh;
+            volcano.Neighbors["east"] = forest;
+            volcano.Neighbors["west"] = temple;
+            tundra.Neighbors["south"] = marsh;
+            tundra.Neighbors["north"] = volcano;
+            tundra.Neighbors["east"] = lake;
+            tundra.Neighbors["west"] = mine;
 
             Rooms["forest"] = forest;
             Rooms["mountain"] = mountain;
             Rooms["lake"] = lake;
+            Rooms["mine"] = mine;
+            Rooms["temple"] = temple;
+            Rooms["marsh"] = marsh;
+            Rooms["plains"] = plains;
+            Rooms["volcano"] = volcano;
+            Rooms["tundra"] = tundra;
         }
     }
 }
