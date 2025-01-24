@@ -1,7 +1,7 @@
 # Text-Based Adventure Game
 
 ## Overview
-Welcome to the **Text-Based Adventure Game**, an immersive journey into a world of exploration, adventure, and decision-making! This game is built in C# and leverages object-oriented principles to create a dynamic and engaging experience. Players navigate through various rooms, encounter random events, and manage their health and score as they progress.
+Welcome to **Pathfinder's Quest**, an immersive journey into a world of exploration, adventure, and decision-making! This game is built in C# and leverages object-oriented principles to create a dynamic and engaging experience. Players navigate through various rooms, encounter random events, and manage their health and score as they progress.
 
 ---
 
@@ -151,4 +151,4 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
-Thank you for playing the **Text-Based Adventure Game**! Feel free to suggest improvements or report issues in the repository.
+Thank you for playing **Pathfinder's Quest**! Feel free to suggest improvements or report issues in the repository.
