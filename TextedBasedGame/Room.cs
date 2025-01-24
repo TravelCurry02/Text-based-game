@@ -85,16 +85,17 @@ namespace RoomMaking
             marsh.Events.Add("Fell into a trap");
 
             Room plains = new Room("You are on some grassy plains.");
-            marsh.Events.Add("Found treasaure");
-            marsh.Events.Add("Fell into a trap");
+            plains.Events.Add("Found treasure");
+            plains.Events.Add("Fell into a trap");
+            plains.Events.Add("Rested and Regain Health");
 
             Room volcano = new Room("You are near a blistering volcano. Thankfully its not erupting.");
-            marsh.Events.Add("Found treasaure");
-            marsh.Events.Add("Fell into a trap");
+            volcano.Events.Add("Found treasure");
+            volcano.Events.Add("Fell into a trap");
         
             Room tundra = new Room("You are in a freezing tundra.");
-            marsh.Events.Add("Found treasaure");
-            marsh.Events.Add("Fell into a trap");
+            tundra.Events.Add("Found treasure");
+            tundra.Events.Add("Fell into a trap");
         
 
             forest.Neighbors["north"] = mountain;
