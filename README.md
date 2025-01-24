@@ -144,11 +144,6 @@ Welcome to **Pathfinder's Quest**, an immersive journey into a world of explorat
 
 ---
 
-## License
-This project is open-source and available under the [MIT License](LICENSE).
-
----
-
 ## Acknowledgments
 
 Thank you for playing **Pathfinder's Quest**! Feel free to suggest improvements or report issues in the repository.
