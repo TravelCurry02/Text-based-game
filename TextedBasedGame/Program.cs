@@ -6,7 +6,7 @@ class Program{
     static void Main(string[] args){
         bool isRunning = true;
 
-        Console.WriteLine("Welcome to Texted Based Game! Using C#");
+        Console.WriteLine("Welcome to Pathfinder's Quest! Using C#");
         Console.WriteLine("1. I'm a new player");
         Console.WriteLine("2. I want to continue my game");
         Console.WriteLine("3. Quit");
