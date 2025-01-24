@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using RoomMaking;
-// Program.cs was worked on by Isaac Selph
+
 class Program{
     static void Main(string[] args){
         bool isRunning = true;

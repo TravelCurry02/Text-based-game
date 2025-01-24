@@ -1,5 +1,4 @@
 ﻿using System;
-// PlayerData.cs was worked on by Isaac Selph 
 public class PlayerData
 {
     public string Name { get; set; }
